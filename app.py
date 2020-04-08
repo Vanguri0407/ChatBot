@@ -1,6 +1,9 @@
 import numpy as np
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, make_response
 import pickle
+from flask_cors import cross_origin
+import json
+import os
 
 app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb'))
@@ -22,10 +25,13 @@ def predict():
 
     return render_template('index.html', prediction_text='Employee Salary should be $ {}'.format(output))
 @app.route('/predictsalary',methods=['POST'])
-def predictsalary():
+@cross_origin()
+def predictsalary(req):
     '''
     For rendering results to DialogFlow
     '''
+    req = request.get_json(silent=True, force=True)
+
     sessionID=req.get('responseId')
 
 
@@ -37,17 +43,20 @@ def predictsalary():
     #print(cust_name)
     test_score = parameters.get("test_score")
     experience=parameters.get("experience")
-    #course_name= parameters.get("course_name")  
+    #course_name= parameters.get("course_name")
+    
     
     int_features = [interview_score,test_score,experience]
     final_features = [np.array(int_features)]
     prediction = model.predict(final_features)
 
     output = round(prediction[0], 2)
-    fulfillmentText = output
-    return {
-            "fulfillmentText": fulfillmentText
-        }
+    res = { "fulfillmentText" : output  }
+    res = json.dumps(res, indent=4)
+    print(res)
+    r = make_response(res)
+    r.headers['Content-Type'] = 'application/json'
+    return r
 
 if __name__ == "__main__":
     app.run(debug=True)
