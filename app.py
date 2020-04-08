@@ -21,7 +21,7 @@ def predict():
     output = round(prediction[0], 2)
 
     return render_template('index.html', prediction_text='Employee Salary should be $ {}'.format(output))
-
+@app.route('/predictsalary',methods=['POST'])
 def predictsalary():
     '''
     For rendering results to DialogFlow
@@ -31,7 +31,7 @@ def predictsalary():
 
     result = req.get("queryResult")
     user_says=result.get("queryText")
-    log.write_log(sessionID, "User Says: "+user_says)
+    #log.write_log(sessionID, "User Says: "+user_says)
     parameters = result.get("parameters")
     interview_score=parameters.get("interview_score")
     #print(cust_name)
