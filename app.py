@@ -51,7 +51,7 @@ def predictsalary():
     prediction = model.predict(final_features)
 
     output = round(prediction[0], 2)
-    res = { "fulfillmentText" : output  }
+    res = { "fulfillmentText" : "Your predicted Salary is $ {}format(output)  }
     res = json.dumps(res, indent=4)
     print(res)
     r = make_response(res)
