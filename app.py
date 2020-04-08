@@ -26,7 +26,7 @@ def predict():
     return render_template('index.html', prediction_text='Employee Salary should be $ {}'.format(output))
 @app.route('/predictsalary',methods=['POST'])
 @cross_origin()
-def predictsalary(req):
+def predictsalary():
     '''
     For rendering results to DialogFlow
     '''
