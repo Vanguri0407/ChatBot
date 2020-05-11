@@ -129,7 +129,7 @@ if(str =='chatbot_app'):
     def chatter():
         inp = request.args.get('msg')
         resp = chat()
-        return str(resp)
+        return resp
 else:
     model = pickle.load(open('model.pkl', 'rb'))
 
