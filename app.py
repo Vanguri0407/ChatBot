@@ -20,7 +20,7 @@ if(str =='chatbot_app'):
     @app.route("/")
     def home():
         return render_template("chat.html")
-    with open("/intents.json") as file:
+    with open("intents.json","rb") as file:
         data = json.load(file)
     try:
         with open("data.pickle", "rb") as f:
