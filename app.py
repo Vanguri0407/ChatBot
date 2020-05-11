@@ -104,7 +104,7 @@ if(str =='chatbot_app'):
     app.route('/chatting')
     def chat():
         print("Start talking with bot! (type quit to stop!)")
-        inp = str(request.args.get('msg'))
+        inp = request.args.get('msg')
 
         results = model.predict([bag_of_words(inp, words)])[0]
         # print("Results : ",results)
