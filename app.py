@@ -14,6 +14,7 @@ import tensorflow  as tf
 import random
 #import json
 #import pickle
+global str
 
 app = Flask(__name__)
 str = 'chatbot_app'
