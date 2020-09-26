@@ -14,6 +14,6 @@ pandas>=0.19
 colorhash==1.0.2
 nltk==3.5
 tflearn==0.3.2
-tensorflow==1.4
+tensorflow==1.15.4
 
 
